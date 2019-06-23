@@ -1,0 +1,149 @@
+\documentclass[UTF8]{ctexart}
+
+\usepackage{listings}
+
+\CTEXsetup[format={\Large\bfseries}]{section}
+
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[table]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{pythonhighlight}
+\usepackage{subfigure}
+\usepackage{fancyhdr}
+\usepackage[superscript]{cite}
+\usepackage{geometry}
+
+\geometry{left=3cm,right=3cm,top=1.5cm,bottom=1.5cm}
+
+
+\begin{document}
+\title{\textbf{跳跃式炸弹的建模与分析}}
+\author{薛昊天 518021910506}
+\date{2019年6月15日}
+\maketitle
+\begin{abstract}
+  二战时期，英国皇家空军为了打击德军鲁尔区的水坝$^{[1]}$，使用了跳跃式炸弹。这种炸弹在投放后会在水面上跳跃前进，以不被德军的水下鱼雷所拦截，
+  最后可以水坝底部爆炸，通过冲击波成功摧毁水坝。本文主要对跳跃式炸弹进行建模，分析其合理性并结合具体数据进行模拟计算。
+
+\end{abstract} 
+
+ \section{概述}
+      “跳跃式炸弹”的优势在于：在精确计算好投弹的距离和高度后，飞机低飞投射出的炸弹在水面上
+      跳跃旋转前进，于是可以成功地躲避德军的水下鱼雷的拦截$^{[2]}$，最后在到达水坝时滚入水坝底部，通过水下爆炸形成的冲击波摧毁水坝。下面我
+      我将对炸弹在水上的运动进行建模，分析其合理性，并计算投弹的距离。
+  
+
+ \section{建模原理以及合理性}
+ \subsection{建模基本原理}
+
+  建模涉及到以下几个流体力学公式：
+
+       \begin{equation}
+           p+\frac{1}{2}\rho{v^2}=const
+       \end{equation}
+          (1)式是伯努利方程$^{[3]}$，p是流体某处压力，$\rho$是液体密度，v是
+       液体在这一点的流速。
+       \begin{equation}
+          f=\mu{S}\frac{dv_r}{dr} 
+       \end{equation}
+       (2)式是液体粘滞阻力方程$^{[3]}$，其本质是物体在流体中的运动带动周围
+       水的运动，造成水层之间的摩擦，形成阻力，其中S是接触面积，$\mu$
+        是流体的动力粘度，$\frac{dv_r}{dr}$表示在速度的
+        垂直于表面方向上单位长度上的速度增量。
+  
+   
+     
+   \subsection{建模前提}
+     在本文计算中，做如下两个假设：\textcircled{1}用伯努利方程计算水对物体的压力时，假设物体周围的水膜厚度不计。\textcircled{2}在物体在水中运动时，带动周围的一层水膜运动，假设这层水膜的厚度是
+       固定的$\Delta{y}$，且水膜中水的流速随着原理物体均匀地从$v_r$下降到0，即假设
+       水是不可压缩的粘性液体。
+
+ \section{轨迹建模过程}
+   \subsection{分析某一次跳跃}
+    假设某一时刻（见图一），炸弹部分浸入水中，这时炸弹受重力G,浮力$F_0$，水对炸弹
+    的粘滞阻力f，流速导致的压强差造成的向上的升力$F_l$。\\
+    \indent 又由公式(2)以及假设1可知，水中部分每一点受水的压强为$\frac{1}{2}\rho{v^2}$,其中v等于
+    $v={v_x}+\omega{R}$，对进入水中部分积分可得(结果发现只有竖直分量) :
+
+  \begin{equation}
+      F_l=\int_{s}\vec{P}ds=\rho{v^2}RLsin\theta
+  \end{equation}
+
+  再由公式(2)以及假设2,对每一点的粘滞阻力积分得：
+
+     
+  
+  \begin{equation}
+    f=2\mu{S}\frac{v}{\Delta{y}}sin\theta
+\end{equation}
+  其中接触面积$S=2\theta{RL}$，L为炸弹长度，m为
+  炸弹质量。
+  
+  \begin{figure}[t]
+    \centering 
+    \includegraphics[width=0.4\textwidth]{figure1.PNG}    
+    \caption{炸弹示意图}
+  \end{figure}
+
+
+
+
+   \indent 所以列出物体的运动学方程(取向右，向上，逆时针为正)：
+
+   \begin{equation}
+    \begin{cases}
+      m\ddot{x}=-2\mu{S}\frac{v}{\Delta{y}}sin\theta \\
+      m\ddot{y}=-G+\rho{v^2}RLsin\theta+L(\theta-\frac{1}{2}sin2\theta)R^2\rho{g}\\
+      M=fR=-\frac{1}{2}mR^2\dot{\omega}\\
+      \Delta{y}=-sin\theta{R\Delta{\theta}}\\
+      v=\dot{x}+\omega{R}
+    \end{cases}
+   \end{equation}
+由能量守恒可知，设第i次的入水和出水的x,y方向速度为${v_x}^{(i,in)},{v_y}^{(i,in)},{v_x}^{(i,out)},{v_y}^{(i,out)}$,有：
+\begin{equation}
+  \begin{cases}
+    {v_x}^{(i,in)}={v_x}^{(i,out)}\\
+    {v_y}^{(i,in)}=-{v_y}^{(i,out)}
+  \end{cases}
+\end{equation}
+
+
+   \subsection{最后的轨迹}
+   由[1],炸弹的形状是长2.5米，直径1.5米的圆柱体，重量是3500公斤，飞机
+   飞行速度335km/s，投射高度18米，炸弹转速大概是20rad/s。
+   所以第一次的入水的${v_x}^{(1,in)}=93m/s,{v_y}^{(1,in)}=19.0m/s$。
+    \indent 方程组（5）是二阶微分方程组且没有初等形式的解，但是从方程
+    的形式我们可以运动状态大致为：
+
+
+
+ \section{结果分析}
+
+
+ \begin{thebibliography}{1}
+
+  \bibitem{Ben-Shimon2015RecSys}
+  Ian A. Whalley1
+Palm Springs.
+Projected upkeep - A Review of the WWII dambuster weapon,2002
+\bibitem{}
+The dam buster,Michael Anderson,1955
+\bibitem{}
+ 新概念物理教程（力学），赵凯华，2004
+
+    
+  
+  \end{thebibliography}
+  
+
+\end{document}
+
+
+
+
