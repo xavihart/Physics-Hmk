@@ -84,17 +84,21 @@
 \end{equation}
   其中接触面积$S=2\theta{RL}$，L为炸弹长度，m为
   炸弹质量。
+浮力容易计算得到：
+  \begin{equation}
+    F_0=L(\theta-\frac{1}{2}sin2\theta)R^2\rho{g}
+\end{equation}
   
   \begin{figure}[t]
     \centering 
     \includegraphics[width=0.4\textwidth]{figure1.PNG}    
-    \caption{炸弹示意图}
+    \caption{炸弹水面受力示意图}
   \end{figure}
 
 
 
 
-   \indent 所以列出物体的运动学方程(取向右，向上，逆时针为正)：
+   \indent 所以综合以上列出物体的运动学方程(取向右，向上，逆时针为正)：
 
    \begin{equation}
     \begin{cases}
@@ -105,13 +109,16 @@
       v=\dot{x}+\omega{R}
     \end{cases}
    \end{equation}
+
 由能量守恒可知，设第i次的入水和出水的x,y方向速度为${v_x}^{(i,in)},{v_y}^{(i,in)},{v_x}^{(i,out)},{v_y}^{(i,out)}$,有：
 \begin{equation}
   \begin{cases}
-    {v_x}^{(i,in)}={v_x}^{(i,out)}\\
-    {v_y}^{(i,in)}=-{v_y}^{(i,out)}
+    {v_x}^{(i+1,in)}={v_x}^{(i,out)}\\
+    {v_y}^{(i+1,in)}=-{v_y}^{(i,out)}
   \end{cases}
 \end{equation}
+
+  移动距离x=$\sum{\Delta{x_i}}=\sum{\int_{t_i}^{t_{i+1}}{{v_x(t)dt}}}$
 
 
    \subsection{最后的轨迹}
@@ -119,11 +126,66 @@
    飞行速度335km/s，投射高度18米，炸弹转速大概是20rad/s。
    所以第一次的入水的${v_x}^{(1,in)}=93m/s,{v_y}^{(1,in)}=19.0m/s$。
     \indent 方程组（5）是二阶微分方程组且没有初等形式的解，但是从方程
-    的形式我们可以运动状态大致为：
+    的形式我们可以运动状态大致为$^{[1]}$：
+    \begin{figure}
+      \centering
+      \includegraphics[width=0.8\textwidth]{figure2.PNG}
+      \caption{炸弹运动轨迹$^{[1]}$}
+    \end{figure}
 
-
+    \indent  再进行近似计算，假设$\theta$取平均值为$\frac{1}{2}\pi$那么先对
+    x方向的微分方程简化可得：
+    \begin{equation}
+      \begin{cases}
+           m\ddot{x}=-2\mu\frac{2\theta{RL}}{\Delta{y}}({\dot{x}+\omega{R}})\\
+           -\frac{1}{2}mR^2\dot{\omega}=2R\pi{R^2}\mu{L}{\frac{\omega{R}+\dot{x}}{\Delta{y}}}
+      \end{cases}
+    \end{equation} 
+两个式子相除再对时间积分可以得到:  $\dot{x}=\frac{1}{2}R\omega$,带回上一个方程组的第一个式子里，可以解除
+再将x带回（5）的第二个式子中可以解析，结果为(x(0)=0,y(0)=R);
+\begin{equation}
+  \begin{cases}
+      x=-\frac{1}{k}e^{-kt}+v_x(0)t\\
+      y= (-g+\frac{L^2\rho{R^2}g\pi}{2m})t^2+9R\rho{L}v_x^2(0)t+R\\
+      k={\frac{6\mu{\pi}RL}{\Delta{y}m}}
+  \end{cases}
+\end{equation}
+代入数据可以求出每一次跳跃的时间为
 
  \section{结果分析}
+
+  
+
+\subsection{误差分析}
+
+
+
+
+  
+  \begin{tabular}{|c|c|c|}
+   
+\hline
+
+计算步骤&产生误差的原因&误差程度\\
+\hline 
+(3)&水膜的厚度不可以忽略&小\\
+\hline 
+(4)&水膜之间的速度变化非线性&小\\
+\hline
+(5)&计算水中平动产生的粘滞阻力流体速度变化&中\\
+\hline
+(7)&计算轨迹解析式时$\theta$变化&较大 \\
+\hline 
+  
+ 
+  \end{tabular}
+
+
+  \subsection{防御措施建议}
+     考虑到炸弹是在近水面上跳跃前进的，所以距离水面较远的水下鱼雷
+     拦截是失效的。针对这种跳跃式炸弹，一方面可以考虑在近水面增加拦截网，
+     在炸弹为到达水坝之前就拦截炸弹，
+     或者在水坝坝面水下一定深度增设拦截装置，以不让炸弹滚到堤坝底部爆炸，以减少损失。
 
 
  \begin{thebibliography}{1}
