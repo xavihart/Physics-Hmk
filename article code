@@ -19,7 +19,7 @@
 \usepackage[superscript]{cite}
 \usepackage{geometry}
 
-\geometry{left=3cm,right=3cm,top=1.5cm,bottom=1.5cm}
+\geometry{left=4cm,right=4cm,top=1.5cm,bottom=1.5cm}
 
 
 \begin{document}
@@ -68,6 +68,11 @@
    \subsection{分析某一次跳跃}
     假设某一时刻（见图一），炸弹部分浸入水中，这时炸弹受重力G,浮力$F_0$，水对炸弹
     的粘滞阻力f，流速导致的压强差造成的向上的升力$F_l$。\\
+    由公式（1）可知圆柱体入水部分表面每一点的压强为:
+    \begin{equation}
+p=\frac{1}{2}\rho{v^2}
+    \end{equation}
+     
     \indent 又由公式(2)以及假设1可知，水中部分每一点受水的压强为$\frac{1}{2}\rho{v^2}$,其中v等于
     $v={v_x}+\omega{R}$，对进入水中部分积分可得(结果发现只有竖直分量) :
 
@@ -91,7 +96,7 @@
   
   \begin{figure}[t]
     \centering 
-    \includegraphics[width=0.4\textwidth]{figure1.PNG}    
+    \includegraphics[width=0.8\textwidth]{figure1.PNG}    
     \caption{炸弹水面受力示意图}
   \end{figure}
 
@@ -125,7 +130,7 @@
    由[1],炸弹的形状是长2.5米，直径1.5米的圆柱体，重量是3500公斤，飞机
    飞行速度335km/s，投射高度18米，炸弹转速大概是20rad/s。
    所以第一次的入水的${v_x}^{(1,in)}=93m/s,{v_y}^{(1,in)}=19.0m/s$。
-    \indent 方程组（5）是二阶微分方程组且没有初等形式的解，但是从方程
+    \indent 方程组（7）是二阶微分方程组且没有初等形式的解，但是从方程
     的形式我们可以运动状态大致为$^{[1]}$：
     \begin{figure}
       \centering
@@ -142,7 +147,7 @@
       \end{cases}
     \end{equation} 
 两个式子相除再对时间积分可以得到:  $\dot{x}=\frac{1}{2}R\omega$,带回上一个方程组的第一个式子里，可以解除
-再将x带回（5）的第二个式子中可以解析，结果为(x(0)=0,y(0)=R);
+再将x带回（7）的第二个式子中可以解析，结果为(x(0)=0,y(0)=R);
 \begin{equation}
   \begin{cases}
       x=-\frac{1}{k}e^{-kt}+v_x(0)t\\
@@ -168,13 +173,13 @@
 
 计算步骤&产生误差的原因&误差程度\\
 \hline 
-(3)&水膜的厚度不可以忽略&小\\
+(4)&水膜的厚度不可以忽略&小\\
 \hline 
-(4)&水膜之间的速度变化非线性&小\\
+(5)&水膜之间的速度变化非线性&小\\
 \hline
-(5)&计算水中平动产生的粘滞阻力流体速度变化&中\\
+(7)&计算水中平动产生的粘滞阻力流体速度变化&中\\
 \hline
-(7)&计算轨迹解析式时$\theta$变化&较大 \\
+(9)&计算轨迹解析式时$\theta$变化&较大 \\
 \hline 
   
  
