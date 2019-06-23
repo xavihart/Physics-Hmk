@@ -24,7 +24,7 @@
 
 \begin{document}
 \title{\textbf{跳跃式炸弹的建模与分析}}
-\author{薛昊天 518021910506}
+\author{薛昊天  518021910506}
 \date{2019年6月15日}
 \maketitle
 \begin{abstract}
@@ -151,8 +151,8 @@ p=\frac{1}{2}\rho{v^2}
 \begin{equation}
   \begin{cases}
       x=-\frac{1}{k}e^{-kt}+v_x(0)t\\
-      y= (-g+\frac{L^2\rho{R^2}g\pi}{2m})t^2+9R\rho{L}v_x^2(0)t+R\\
-      k={\frac{6\mu{\pi}RL}{\Delta{y}m}}
+      y\approx(-g+\frac{L^2\rho{R^2}g\pi}{2m})t^2+9R\rho{L}v_x^2(0)t+R\\
+      k={\frac{6\mu{\pi}RL}{m\Delta{y}}}
   \end{cases}
 \end{equation}
 代入数据可以求出每一次跳跃的时间为
@@ -180,6 +180,8 @@ p=\frac{1}{2}\rho{v^2}
 (7)&计算水中平动产生的粘滞阻力流体速度变化&中\\
 \hline
 (9)&计算轨迹解析式时$\theta$变化&较大 \\
+\hline
+(9)&计算y的解析计算式时省去相对小量&中\\
 \hline 
   
  
@@ -193,6 +195,13 @@ p=\frac{1}{2}\rho{v^2}
      或者在水坝坝面水下一定深度增设拦截装置，以不让炸弹滚到堤坝底部爆炸，以减少损失。
 
 
+    \section{致谢}
+    感谢老师给予的启发性建议，感谢组员在论文排版和思路上给予的支持与帮助，让我
+    顺利写完这篇论文，
+    由于作者本人的学术水平有限，
+    所写论文难免有不足之处，恳请老师和助教批评和指正！
+      
+
  \begin{thebibliography}{1}
 
   \bibitem{Ben-Shimon2015RecSys}
@@ -200,9 +209,9 @@ p=\frac{1}{2}\rho{v^2}
 Palm Springs.
 Projected upkeep - A Review of the WWII dambuster weapon,2002
 \bibitem{}
-The dam buster,Michael Anderson,1955
+Michael Anderson，The dam buster,1955
 \bibitem{}
- 新概念物理教程（力学），赵凯华，2004
+ 赵凯华，新概念物理教程（力学），2004
 
     
   
