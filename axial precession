@@ -1,0 +1,232 @@
+\documentclass[UTF8]{ctexart}
+
+
+\usepackage{listings}
+
+\CTEXsetup[format={\Large\bfseries}]{section}
+
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[table]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{pythonhighlight}
+\usepackage{subfigure}
+\usepackage{fancyhdr}
+\usepackage[superscript]{cite}
+\usepackage{geometry}
+\usepackage{bm}
+
+\geometry{left=4cm,right=4cm,top=1.5cm,bottom=1.5cm}
+
+\begin{document}
+\title{\textbf{计算地球岁差}}
+\author{薛昊天  518021910506}
+\date{2019年6月15日}
+\maketitle
+\begin{abstract}
+    岁差在天文学中是指一个天体的自转轴指向因为重力作用导致在空间中缓慢且连续的变化$^[1]$。
+    本文提供一种利用引潮力计算岁差的方法，并给出误差分析。
+
+\end{abstract} 
+\textbf{关键词：}岁差，引潮力，进动,坐标变换
+\section{概述}
+   岁差的产生主要是由于地球是不规则几何体，正因如此，
+   当地球绕太阳运动时，太阳对球的引力其实不可以等效在几何中心，
+   所以引力其实对地球转轴产生一个力矩，导致地轴绕某一定轴进行
+   周期性的进动，这个进动的周期就是岁差，下面我们将利用引潮力计算
+   地球岁差。
+  
+
+\section{计算前提与假设}
+\textbf{本文对地球岁差的计算给予以下假设以及模型简化：}\\
+  \indent 1.地球形状近似成一个密度均匀的旋转椭球，且半长轴
+   为a=6372800m，半短轴为6356800m。\\
+   \indent2.由于地球的进动角速度很小，所以可以将地球看成刚体。\\
+   \indent3.忽略月球绕地球运行平面与
+   地球公公转轨道平面的夹角($5.9^{\circ}$),即认为两个
+   平面重合。\\
+    \indent4.忽略除了月球和太阳以外其它星球的引潮力。\\
+   \indent 5.近似月球绕地球运动轨迹为圆。\\
+   \indent6.不考虑地球的章动。
+
+\section{引潮力计算}
+ \begin{figure}
+     \centering
+     \includegraphics[width=0.8\textwidth]{f1.PNG}
+     \caption{引潮力计算示意图}
+ \end{figure}
+
+我们设太阳的质量$m_s$，质心为O,地球的质量为$m_e$,密度为
+$\rho^{'}$，质心为C。（见图一）$\bm{r_c}=\vec{OC}$,
+坐标系$Cx^{'}y^{'}z^{'}$, 其中$x^{'}y^{'}$ 是赤道面，$z^{'}$
+轴式旋转对称轴，$\alpha$是赤道面和$\bm{r_c}$的夹角，
+可以知道，$\alpha$随着时间在变化，夏至，冬至时最大；春分，
+秋分时为0。z轴沿$\bm{r_c}$方向，
+x轴在$\bm{r_c}$与$z^{'}$轴形成的平面中，
+取参考系$Cxyz$，它是一个非惯性参考系，它
+在绕着太阳转动，
+C的加速度为：
+
+
+
+\begin{equation}
+    a_c=-\frac{Gm_{s}\bm{r_c}}{r_c^3}
+\end{equation}
+
+
+下面计算在上述参考系中，椭球中任意一点P附近的质量微元$\rho^{'}dV$
+ 的受力情况：它受太阳的引力和非惯性系中的惯性力,分别计算得：
+ \begin{equation}
+     \begin{cases}
+      \bm{F_{sun}}=-\frac{Gm_s\bm{r_p}}{{r_p}^3}\\
+\bm{F_f}=-\bm{a_c}\rho^{'}dV=\frac{Gm_{s}\bm{r_c}}{r_c^2}\rho^{'}dV   
+     \end{cases}
+ \end{equation}
+注意到:$\bm{r_p}=\bm{r_c}+\bm{r}=\bm{r_c}+x\bm{i}+y\bm{j}+z\bm{k} $
+以及$|\bm{r_p}|=\sqrt{r_c^{2}+r^{2}+2\bm{r_c{r}}}$,因为$r<<r_c$，所以${ (\frac{r}{r_c}})^{k}(k>1)$为高阶无穷小量)
+所以可以求得引潮力为：
+
+\begin{equation}
+ d\bm{F_t}=d\bm{F_{sun}}+d\bm{F_f}=\frac{Gm_s(3z\bm{k}-\bm{r})}{r_c^3}\rho^{'}dV
+\end{equation}
+
+
+
+\section{计算力矩}
+  \subsection{瞬时力矩}
+  地球受到的总瞬时力矩为：
+  \begin{equation}
+    \bm{M_T}=\int_{V}\bm{r}\times{dF_t}=\int_{V}{\frac{Gm_s(3z\bm{k}-\bm{r})}{r_c^3}\rho^{'}dV}
+  =\frac{3Gm_s}{r_c^3}\int_{V}({yz\bm{i}-xz\bm{j}})\rho^{'}dV
+   \end{equation}
+  由于椭球的对称性，可以知道上面积分号里的第一项为0，然后变换到$Cx^{'}y^{'}z^{'}$中：
+   \begin{equation}
+    \begin{cases}
+        x=x^{'}sin\alpha-z^{'}cos\alpha\\
+        y=y^{'}\\
+        z=x^{'}cos\alpha+z^{'}sin\alpha
+    \end{cases}
+   \end{equation}
+
+将（5）带入（4）中可以得到在$Cx^{'}y^{'}z^{'}$中力矩为：
+\begin{equation}
+    \bm{M_t}=-\bm{j}\frac{3G_m{m_s}}{2r_c^3}(J_3-J_1)sin2\alpha
+\end{equation}
+其中$J_1,J_3$分别地球绕$x^{'}$轴和$z^{'}$的转动惯量。
+   
+
+ \subsection{平均力矩}
+
+   如图2，建立参考系CXYZ，并定义$\bm{e_X,e_Y,e_K}$为X,Y,Z方向上的
+   单位向量。
+   其中Z轴与地球轴夹角$\theta=23^{\circ}27^{'}$
+,转动角度$\varphi=\omega{t}$其中$\omega$为公转角速度
+，通过坐标变化将公式（6）由$Cx^{'}y^{'}z^{'}$变换到CXYZ中得到（6）中
+的$-\bm{j}sin2\alpha$变为了：
+\begin{equation}
+  -sin\varphi{cos\varphi}(\frac{1}{2}sin2\theta{\bm{e_X}}+{sin\theta}^2\bm{e_Z})+\frac{cos\varphi^2}{2}sin2\theta\bm{e_Y}
+\end{equation}
+所以（6）变为：
+\begin{figure}
+    \centering 
+    \includegraphics[width=0.8\textwidth]{f2.png}
+   \caption{}
+\end{figure}
+
+\begin{equation}
+ \bm{M_t}(CXY)=\frac{3G_m{m_s}}{2r_c^3}(J_3-J_1)sin\alpha(-sin\varphi{cos\varphi}(\frac{1}{2}sin2\theta{\bm{e_X}}+{sin\theta}^2\bm{e_Z})+\frac{cos\varphi^2}{2}sin2\theta\bm{e_Y})
+\end{equation}
+然后对$\varphi$积分求得平均力矩为：
+\begin{equation}
+   \bm{M_{average}}=\int_{0}^{2\varphi}\bm{M_t}(\varphi)d\varphi=\bm{e_Y}\frac{3G_{m_s}}{4r_c^3}sin2\theta(J_3-J_1)
+\end{equation}
+由简化，月球运动平面和地球公转平面几乎重合，所以类似的上述计算过程可以得到月球引潮力的平均力矩，只需将上面
+公式中的质量和距离矢量换成月球的即可，所以最后总引潮力的平均力矩为：
+\begin{equation}
+    \bm{M_{average}}==\bm{e_Y}(\frac{3G_{m_s}}{4r_c^3}+\frac{3G_{m_{m}}}{4r_m^3})sin2\theta(J_3-J_1)
+ \end{equation}
+由刚体定轴转动定理$^[2]$：
+\begin{equation}
+     \bm{M}=\frac{d\bm{L}}{dt}
+ \end{equation}
+ 在地球的进动模型中,记由简化假设，绕I3的角动量L$\approx{\omega_{s}}J_3$：
+
+ \begin{equation}
+    \bm{M}=\frac{d\bm{L}}{dt}=\bm{\omega_{p}\times{L}}=\bm{\omega_p\times{\omega_{s}{J_3}}}
+\end{equation}
+其中$\omega_{p}$为进动角速度。
+
+
+  地球的进动轴为Z，对应转动惯量I为$I_3$所以带入（9）有：
+  \begin{equation}
+    \omega_p\omega_s=\frac{3}{2}(\frac{Gm_s}{r_c^3}+\frac{Gm_m}{r_m^3})\frac{J3-J1}{J3}cos\theta
+\end{equation}
+
+ \section{结果及分析}
+    对于一个地球（椭球）$J_1=J_2=\frac{m_e}{5}(a^2+b^2),J_3=\frac{2m_e}{5}a^2$
+   带入数据G=6.67$\times10^{-11}Nm^2/kg^2,m_s=1.9891\times10^{30}kg,m_m=
+   7.349\times10^{22}kg,r_c=149597870km,r_m=384400km,m_e=5.965\times{10^{24}}kg,
+   a=6378200m,b=6356800m$
+带入（13）计算得进动角速度$\omega_p=7.958\times10^{-12}rad/s^2$,所以岁差
+为约25036年，与观测值误差约3.7\%。
+  误差分析见下表：\\
+
+  \begin{tabular}{|c|c|c|}
+   
+    \hline
+    
+    计算步骤（对应的公式）&产生误差的原因&误差程度\\
+    \hline 
+    (2)&$r_c$其实是不断变化的&中\\
+    \hline
+    (3)&忽略一些小量&很小\\
+    \hline
+    (9)&运动轨迹不是圆&中\\
+    \hline
+    (12)&月球运动面和地球公转面夹角&中\\
+    \hline
+
+    (12)&地球内部温度很高，不能看成刚体&可能较大\\
+    \hline
+
+    
+
+    \hline 
+      
+     
+      \end{tabular}
+      
+      \section{致谢}
+
+      感谢老师给予的启发性建议与知识上的指导，感谢组员在论文排版和思路上给予的支持与帮助，让我
+      顺利写完这篇论文，
+      由于作者本人的学术水平有限，
+      所写论文难免有不足之处，恳请老师和助教批评和指正！
+   
+
+
+      \begin{thebibliography}{1}
+
+        \bibitem{}
+        赵凯华，罗蔚茵.新概念物理学：力学[M],北京：高等教育出版社，2004
+
+
+      \bibitem{}
+        吴锡龙，大学物理教程：第一册[M],北京：高等教育出版社，1999
+         
+      \bibitem{}
+        于凤军，用引潮力算岁差,大学物理[J]，25(2)
+       
+          
+        
+        \end{thebibliography}
+
+
+
+
+\end{document}
