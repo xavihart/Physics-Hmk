@@ -1,0 +1,105 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[UTF8]{ctex}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[table]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{pythonhighlight}
+\usepackage{subfigure}
+\usepackage{fancyhdr}
+\usepackage[superscript]{cite}
+\usepackage{geometry}
+
+\geometry{left=4cm,right=4cm,top=1.5cm,bottom=1.5cm}
+\begin{document}
+\title{木星磁场的建模与计算}
+\author{薛昊天 518021910506}
+\date{}
+
+\maketitle
+\begin{abstract}
+   木星作为太阳系最大的行星，拥有最强的行星磁场。木星磁场是木星探测的基本环境之一，因此对木星磁场的建模很有意义。本文通过借鉴国际地磁场的建模计算过程，在木星上类比计算出磁场强度。\\
+  \textbf{关键词：木星，磁场，建模}
+  
+\end{abstract}
+
+
+
+
+\section{建模过程}
+ \subsection{基本假设}
+   在本文中，我们假设木星是一个规则球体，半径为$R_J$，参考系使用 Right-handed System III
+   (S3RH), 如图1：在这一参考系下，木星表面一个点的经度$\lambda_{RH}$随着自传而减小。
+   同时我们假设木星内部的磁场是由恒定电场产生的稳恒磁场，是一个有势无旋场。
+   
+\begin{figure}
+    \centering
+    \includegraphics[scale=1.2]{./figure/S3RH.PNG}
+    \caption{S3RH木星坐标系}
+    \label{fig:my_label}
+\end{figure}   
+
+   \subsection{公式}
+   首先在麦克斯韦方程组中，在稳恒场中有：
+   
+   \begin{equation} 
+       \nabla \times E = \frac{\partial{B}}{\partial{t}} 
+   \end{equation}
+
+   而在假设的稳恒电厂下，有 $E=-\nabla{\varphi}$。在S3RH参考系下，有$\varphi=U(r,\theta,\lambda)$,代入式（1）有：
+   
+   \begin{equation} 
+       \nabla^{2}\varphi=\nabla^{2}U(r,\theta,\lambda)=0
+   \end{equation}
+   这是一个球坐标下的拉普拉斯方程，表达式可以求出是：
+
+    \begin{equation}
+        \frac{1}{r^{2}}\frac{\partial}{\partial{r}}(r^2\frac{\partial{U}}{\partial{r}})+\frac{1}{r^2sin\theta}\frac{\partial}{\partial\theta}(sin\theta\frac{\partial{U}}{\partial\theta}) + \frac{1}{r^2sin^2\theta}\frac{\partial^{2}U}{\partial{\lambda}^2}=0
+   \end{equation}
+   
+分离变量r，有：
+     \begin{equation} 
+      U(r,\theta,\lambda) = R(r)Y(\theta, \lambda)
+   \end{equation}
+   
+代入（3）变形可以得到：
+\begin{equation} 
+      \frac{1}{R}\frac{d}{dr}(r^2\frac{dR}{dr}) = \frac{1}{sin\theta{Y}}\frac{\partial}{\partial\theta}(sin\theta\frac{\partial{Y}}{\partial{\theta}})-\frac{1}{Y}\frac{1}{r^2sin\theta}\frac{\partial^2Y}{\partial\lambda^2}   
+   \end{equation}
+   
+ 上面等式的左边是关于r的函数，右边是关于$\theta,\lambda$的函数，所以由自变量的任意性可以知道等式两边都恒等与某一个常数，记为$l(l+1)$,则可以将上述方程拆分成两个方程：
+ 
+ \begin{equation}
+         \frac{d}{dr}(r^2\frac{dR}{dr})-l(l+1)R=0      
+ \end{equation}
+ 
+ \begin{equation}
+        \frac{1}{sin\theta}\frac{\partial}{\partianl\theta}(sin\theta\frac{\partial{Y}}{\partial\theta})+\frac{1}{sin^2\theta}\frac{\partial^2Y}{\partial\lambda^2}+l(l+1)Y=0
+ \end{equation}
+ 
+   其中方程(6)是一个欧拉型常微分方程，它的解是：
+   
+  \begin{equation}
+      R(r)=Cr^{l} + Dr^{-l-1}
+  \end{equation}
+  
+  方程（7）仍然是球函数方程，可以进一步分离变量：$Y(\theta,\lambda)=\Gamma(\theta)\Phi(\lambda)$
+
+ 代入（7）中，将$\theta$和$\lambda$有关的式子分别移到等式两侧得到：
+ 
+ \begin{equation}
+     \frac{sin\theta}{\Gamma}\frac{d}{d\theta}(sin\theta\frac{d\Gamma}{d\theta})+l(l+1)sin^2\theta=-\frac{1}{\Phi}\frac{d^2\Phi}{d^2\lambda}
+ \end{equation}
+\section{计算过程}
+同样可以知道左右一定恒等与某一个常数
+
+
+
+\section{总结}
+
+\end{document}
