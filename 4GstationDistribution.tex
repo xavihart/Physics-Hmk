@@ -1,0 +1,198 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[UTF8]{ctex}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[table]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{pythonhighlight}
+\usepackage{subfigure}
+\usepackage{fancyhdr}
+\usepackage[superscript]{cite}
+\usepackage{geometry}
+\usepackage{appendix}
+\usepackage{listings}
+\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+
+
+
+\geometry{left=4cm,right=4cm,top=1.5cm,bottom=1.5cm}
+\begin{document}
+\title{关于致远学院附近的移动通讯基站分布的研究}
+\author{薛昊天 518021910506}
+\date{\small{上海交通大学${ }$电子信息与电气工程学院}}
+\maketitle
+\begin{abstract}
+   本文主要调研了上海交通大学致远学院附近的第四代移动通讯技术（4G）基站的分布情况。根据调研情况和电磁波的传播规律进行定量分析，计算4G信号的覆盖范围。最后本文还针对将来的5G基站的部署提供了一些参考意见。\\
+  \textbf{关键词：4G，5G，基站分布，信号损耗}
+\end{abstract}
+
+\section{介绍}
+
+\subsection{移动通信简介}
+  移动通信有两种主要形式：移动体和固定体之间的通信，移动体与移动体之间的通信。其中移动体可以是人，也可以是汽车、火车、轮船、收音机等在移动状态中的物体。移动通信的 基本结构包括：移动台，基站系统和移动交换中心。移动台设备和基站进行直接交流，进而移动台之间通过基站进行相互之间的连接。
+  
+   移动通信是进行无线通信的现代化技术，这种技术是电子计算机与移动互联网发展的重要成果之一。移动通信技术经过第一二三代、第四代（4G）技术的发展，目前，已经迈入了第五代（5G）发展的时代。
+   
+\subsection{致远学院地理位置简介} 
+   本文中的致远学院指上海交通大学致远学院，位于上海市闵行区东川路800号-上海交通大学理科楼群6号楼，我们研究其附近的基站分布区域主要是指理科群楼以及李政道图书馆这一片区域。
+
+
+
+\section{信号损耗的计算原理}
+   \subsection{传播损耗}
+   定义传播损耗$L$是信号输出功率$P_t$和输入功率$P_r$之比，用来反映信号在传播过程中因为传播介质等因素而引起损失公式如下:
+   \begin{equation}
+       L = \frac{P_t}{P_r}
+   \end{equation}
+   
+   对两边同时取对数并用分别单位进行表示有:
+   \begin{equation}
+      L(dB) = P_t(dB) - P_r(dB)
+   \end{equation}
+   
+   无线通讯信号的损耗程度可以直接影响通讯设备对它的接受情况,因此区域内信号传播损耗对无线通讯技术来说是一个重要的检验标准。
+   
+    \subsection{自由空间内的信号传播}
+    在一个自由空间内我们假设无线信号在真空中传播不受障碍物阻碍，记无线信号出发经过$d$到达接收设备，接收功率$S$, 接受信号的天线的有效面积为$A$，则有
+    
+    \begin{equation}
+        Pr = SA
+    \end{equation}
+     \begin{equation}
+        A = \frac{\lambda^2G_r}{4\pi} = \frac{c^2G_r}{4\pi{f^2}}
+    \end{equation}
+     \begin{equation}
+        S = \frac{P_tG_t}{a\pi{d^2}}
+    \end{equation}
+    
+    其中$G_t,G_r$分别表示发射天线和接收天线的增益，f为工作频率。下面为了简化计算我们设发射天线和接收天线都是各向同性的天线则有$G_t=G_r=1$。利用上面三个公式我们可以计算出：
+    \begin{equation}
+        L = (\frac{4\pi{d}}{\lambda})^2
+    \end{equation}
+    
+    \begin{equation}
+        L(dB) = 32.45 + 20lg(f) + 20lg(d)
+    \end{equation}
+    
+    这其实就是自由空间传播损耗与工作频率以及传播距离的关系，这里频率f的单位是MHz，距离d的单位是km。
+    
+    
+    \subsection{无线信号绕射传播}
+        无线电波在传播过程中遇到尺寸远远大于波长的障碍物的时候会发生衍射也就是绕射传播。
+    考虑到我们研究的致远学院附近建筑多为高峰建筑所以我们主要使用单峰绕射传播模型。模型示意如图1（a）：其中P单峰，TR是信号直射路线。x这里取负值，决定P到直射路线的距离则绕射损耗主要由$\frac{x}{x_1}$决定，其中$x_1$计算如下:
+        \begin{equation}
+            x_1 = \sqrt{\lambda\frac{d_1d_2}{d_1+d_2}}
+        \end{equation}
+    绕射损耗和$\frac{x}{x_1}$的函数关系大概如图1(b)所示。
+    
+\begin{figure}[htbp]
+\centering
+\subfigure[单峰绕射]{
+\begin{minipage}[t]{0.53\linewidth}
+\centering
+\includegraphics[scale=0.25]{./figure/danfeng.pdf}
+%\caption{fig1}
+\end{minipage}%
+}%
+\subfigure[单峰绕射损耗]{
+\begin{minipage}[t]{0.6\linewidth}
+\centering
+\includegraphics[scale=0.5]{./figure/fig2.png}
+%\caption{fig2}
+\end{minipage}%
+}%
+
+\centering
+\caption{单峰绕射示意图及其绕射损耗图}
+\end{figure}
+
+    
+    
+  
+  
+\section{4G基站分布的考察结果}
+    我们考察了致远学院附近的电信的4G信号强度在选取的测量点利用移动设备测量信号强度。在网上查阅了有关致远学院附近的4G基站大概位置分布后，我们决定主要考虑西面最近的电信4G基站。测量点的选取和基站的位置如图2，测量结果见表1。
+    
+    \begin{figure}
+        \centering
+        \includegraphics[scale=0.3]{./figure/fig3.png}
+        \caption{测量基站点示意图}
+        \label{fig:my_label}
+    \end{figure}
+    
+    
+    
+ 
+    
+    \begin{table}
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+        测量点序号 & 信号强度(dB) & 信号强度(asu) \\
+        \hline
+         1& -71& 69 \\
+         2& -79& 61\\
+         3& -74& 66\\
+         4& -85& 55\\
+         5& -99& 41\\
+         6& -85& 55\\
+         7& -102& 38\\
+         8& -88& 52\\
+         9& -79& 64\\
+         10& -82& 58\\
+         11& -83& 57\\
+         12& -82& 58\\
+         13& -90& 50\\
+         14& -82& 58 \\
+         \hline
+       
+    \end{tabular}
+    \caption{信号强度测量数据}
+\end{table}
+
+\subsection{自由传播}
+当信号传播路径不被理科群楼阻碍的时候我们进行了一下简单计算：
+厂家发射无线电信号的功率$P_r$近似为43dB,4G信号的频率f约为2500MHz；传播距离我们近似为200m，
+带入式（7）可以算出来接收功率大约-73dB，和左右测量点的测得数值进行比较，可以得到按照（7）进行计算得到的信号损耗是具有合理性的。
+
+\subsection{绕射传播}
+当信号被理科群楼中的某一座阻挡的时候信号发生的是绕射根据计算$\frac{x}{x_1}$:我们取x=5m,d1=100m,d2=200m,计算出x1=2.8m,根据图1(b)得到损失大约是22dB,和测量结果十分近似。这说明了绕射信号损失的合理性。
+
+\subsection{一般情况}
+ 根据用户移动设备的信号接收功率极限$P_t$大概是-110dB，由于真实情况下信号的传播过程受到了很多因素影响：建筑群密度，人流密度，噪声，空气情况等。近似穿透损耗为$L_1$30dB,绕射损$L_2$20dB。那么总损耗是：
+ 
+ \begin{equation}
+     L = P_r - P_t - L_1 - L_2
+ \end{equation}
+ 
+ 带入计算得到L大约100dB,带入（7）有覆盖距离d大约1.13km的覆盖面积。
+ 
+ 但是实际上在信号比较密集的城区，干扰会更大，所以一般的4G基站之间的距离会设置在400m
+ 左右。
+
+
+\section{5G基站部署建议}
+     5G 信号与 4G 信号最主要的的区别是 5G 信号的频率更高，是波长更小的毫米波。为方
+面计算，取未来 5G 的主要频段 3400MHz 至 3600MHz, 为了简化计算，我们取 5G 波频率
+f = 3500MHz。
+
+   我们知道，频率越大，波长越小的波穿透能力就越强，传播损耗就越大，根据5G宏站的链路传输预算记5G相比于4G波穿过建筑物时的损耗 V = 33dB。
+   
+   和上文的计算思路相同，我们可以计算出密集城区5G信号的理论覆盖范围小于4G，大约是720m，由基站的理论分布距离与基站的覆盖范围等比例计算出：5G部署时基站的理论距离应控制在250m。
+   
+   由上面计算我们可以看出，5G信号传播虽然信息流量十分大，但是在传播的过程中会有很大的信号损失，覆盖范围小，需要更多基站。目前主要有下面两种解决方法，一是波束赋形，就是实时探测接收目标的位置然后相应调整发射设备的角度；二是直接通讯技术：即同一个基站下两个设备进行直接通讯，不通过基站进行中转。
+   
+
+
+
+
+\section{致谢}
+
+
+
+\end{document}
